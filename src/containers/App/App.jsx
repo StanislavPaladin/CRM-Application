@@ -1,10 +1,18 @@
 import PropTypes from "prop-types";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { useEffect } from "react";
+import { getLocalStorage } from "@utils/localStorage";
 import routesConfig from "@routes/routesConfig";
+import { changeCSSVariables } from "@services/changeCSSVariables";
 import Sidebar from "@components/Sidebar";
+
 import styles from "./App.module.css";
 
 const App = () => {
+	const theme = getLocalStorage("theme");
+	useEffect(() => {
+		changeCSSVariables(theme);
+	}, []);
 	return (
 		<div className={styles.container}>
 			<BrowserRouter>
