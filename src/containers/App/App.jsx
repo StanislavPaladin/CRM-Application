@@ -6,7 +6,7 @@ import styles from "./App.module.css";
 
 const App = () => {
 	return (
-		<>
+		<div className={styles.container}>
 			<BrowserRouter>
 				<Sidebar />
 				<Routes>
@@ -20,7 +20,7 @@ const App = () => {
 					))}
 				</Routes>
 			</BrowserRouter>
-		</>
+		</div>
 	);
 };
 
