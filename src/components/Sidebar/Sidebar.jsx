@@ -3,10 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ReactTooltip from "react-tooltip";
 import { themeSelector } from "@store/constants/selectors";
-import {
-	THEME_DARK,
-	THEME_LIGHT,
-} from "@store/constants/actionTypes";
+import { THEME_DARK, THEME_LIGHT } from "@store/constants/actionTypes";
 import { changeTheme } from "@store/actions";
 
 import logo from "./img/logo.svg";
@@ -16,36 +13,49 @@ import homeLight from "./img/home-light.svg";
 import homeDark from "./img/home-dark.svg";
 import themeDark from "./img/theme-dark.svg";
 import themeLight from "./img/theme-light.svg";
+import warehouseDark from "./img/warehouse-dark.svg";
+import warehousesLight from "./img/warehouse-light.svg";
 
 import styles from "./Sidebar.module.css";
 
 const Sidebar = () => {
 	const dispatch = useDispatch();
 
-	const [cartIcon, setCartIcon] = useState(null);
-	const [homeIcon, setHomeIcon] = useState(null);
-	const [themeIcon, setThemeIcon] = useState(null);
+	const [cartIcon, setCartIcon] = useState(cartLight);
+	const [homeIcon, setHomeIcon] = useState(homeLight);
+	const [themeIcon, setThemeIcon] = useState(themeDark);
+	const [warehoseIcon, setWarehouseIcon] = useState(warehousesLight);
 
 	const dispatchTheme = (themeName) => {
 		dispatch(changeTheme(themeName));
 	};
 	const theme = useSelector(themeSelector);
+	
+	useEffect(() => {
+		// default theme if no theme saved for user
+		!theme.length && dispatchTheme(THEME_LIGHT);
+	}, []);
 
 	useEffect(() => {
 		switch (theme) {
-			case 'dark':
+			case "dark":
 				setCartIcon(cartDark);
 				setHomeIcon(homeDark);
 				setThemeIcon(themeLight);
+				setWarehouseIcon(warehouseDark);
 				break;
-			case 'light':
+			case "light":
 				setCartIcon(cartLight);
 				setHomeIcon(homeLight);
 				setThemeIcon(themeDark);
-				break;	
-			default: return
+				setWarehouseIcon(warehousesLight);
+				break;
+			default:
+				setCartIcon(cartLight);
+				setHomeIcon(homeLight);
+				setThemeIcon(themeDark);
+				setWarehouseIcon(warehousesLight);
 		}
-
 	}, [theme]);
 
 	return (
@@ -64,7 +74,7 @@ const Sidebar = () => {
 					</NavLink>
 				</li>
 				<li className={styles.link}>
-					<NavLink to="/cart" exact="true">
+					<NavLink to="/products" exact="false">
 						<img
 							className={styles.icon}
 							src={cartIcon}
@@ -72,11 +82,24 @@ const Sidebar = () => {
 						/>
 					</NavLink>
 				</li>
+				<li className={styles.link}>
+					<NavLink to="/warehouses" exact="false">
+						<img
+							className={styles.icon}
+							src={warehoseIcon}
+							alt="warehouses"
+						/>
+					</NavLink>
+				</li>
 			</ul>
 			<ul className={styles.theme__container}>
 				<div className={styles.theme__switcher}>
 					<img
-						onClick={() => dispatchTheme(theme === THEME_LIGHT ? THEME_DARK : THEME_LIGHT)}
+						onClick={() =>
+							dispatchTheme(
+								theme === THEME_LIGHT ? THEME_DARK : THEME_LIGHT
+							)
+						}
 						className={styles.icon__theme}
 						src={themeIcon}
 						alt="home"

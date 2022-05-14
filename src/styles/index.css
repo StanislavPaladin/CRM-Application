@@ -9,10 +9,11 @@
 	--color-light-gray: #3d3d3d;
 	--color-green: #2daa89;
 	--color-orange: #f98500;
+	--color-light-sky: #bacbf0;
 
 	/* margins and paddings */
 	--spacing-ultrasmall: 3px;
-	--spacing-small: 3px;
+	--spacing-small: 5px;
 	--spacing-medium: 10px;
 	--spacing-large: 20px;
 
@@ -35,8 +36,8 @@
 	--border-raius-big: 10px;
 
 	/* themes*/
-	--theme-light-bg: var(--color-white);
-	--theme-dark-bg: var(--color-gray);
+	--theme-light-bg: var(--color-light-sky);
+	--theme-dark-bg: var(--color-light-gray);
 
 	--theme-light-sidebar: var(--color-violet);
 	--theme-dark-sidebar: var(--color-orange);
@@ -44,11 +45,12 @@
 	--theme-light-text: var(--color-black);
 	--theme-dark-text: var(--color-white);
 
-	--theme-light-active: var(--color-blue);
-	--theme-dark-active: var(--color-light-gray);
+	--theme-light-active: var(--color-light-blue);
+	--theme-dark-active: var(--color-blue);
 
 	--theme-light-icons: var(--color-white);
 	--theme-dark-icons: var(--color-black);
+
 
 	--theme-default-bg: var(--theme-light-bg);
 	--theme-default-sidebar: var(--theme-light-sidebar);
@@ -62,7 +64,8 @@ html {
 }
 
 body {
-	margin: 0;
+	width: 99%;
+	margin: auto;
 	padding: 0;
 	color: var(--theme-default-text);
 	font-family: var(--font-family-main), sans-serif;

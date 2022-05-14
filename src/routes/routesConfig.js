@@ -1,5 +1,6 @@
 import HomePage from "@containers/HomePage"
-import Cart from "@containers/Cart"
+import Products from "@containers/Products"
+import Warehouses from "@containers/Warehouses";
 
 const routesConfig = [
     {
@@ -8,9 +9,14 @@ const routesConfig = [
 		element: <HomePage />,
 	},
     {
-		path: "/cart",
-		exact: true,
-		element: <Cart />,
+		path: "/products",
+		exact: false,
+		element: <Products />,
+	},
+	{
+		path: "/warehouses",
+		exact: false,
+		element: <Warehouses />,
 	},
 ]
 
