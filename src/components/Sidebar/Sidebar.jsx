@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ReactTooltip from "react-tooltip";
+
 import { themeSelector } from "@store/constants/selectors";
 import { THEME_DARK, THEME_LIGHT } from "@store/constants/actionTypes";
 import { changeTheme } from "@store/actions";
@@ -20,17 +20,17 @@ import styles from "./Sidebar.module.css";
 
 const Sidebar = () => {
 	const dispatch = useDispatch();
+	const dispatchTheme = (themeName) => {
+		dispatch(changeTheme(themeName));
+	};
+	const theme = useSelector(themeSelector);
 
 	const [cartIcon, setCartIcon] = useState(cartLight);
 	const [homeIcon, setHomeIcon] = useState(homeLight);
 	const [themeIcon, setThemeIcon] = useState(themeDark);
 	const [warehoseIcon, setWarehouseIcon] = useState(warehousesLight);
 
-	const dispatchTheme = (themeName) => {
-		dispatch(changeTheme(themeName));
-	};
-	const theme = useSelector(themeSelector);
-	
+
 	useEffect(() => {
 		// default theme if no theme saved for user
 		!theme.length && dispatchTheme(THEME_LIGHT);
@@ -65,13 +65,13 @@ const Sidebar = () => {
 					<img className={styles.logo} src={logo} alt="logo" />
 				</div>
 				<li className={styles.link}>
-					<NavLink to="/" exact="true">
-						<img
-							className={styles.icon}
-							src={homeIcon}
-							alt="home"
-						/>
-					</NavLink>
+						<NavLink to="/" exact="true">
+							<img
+								className={styles.icon}
+								src={homeIcon}
+								alt="home"
+							/>
+						</NavLink>
 				</li>
 				<li className={styles.link}>
 					<NavLink to="/products" exact="false">

@@ -10,6 +10,7 @@ const store = createStore(
 // subscription to any changes in store to set data to localstorage
 store.subscribe(() => {
     setLocalStorage('theme', store.getState().themeReducer);
+	setLocalStorage('warehouses', store.getState().warehouseReducer);
 });
 
 export default store;
