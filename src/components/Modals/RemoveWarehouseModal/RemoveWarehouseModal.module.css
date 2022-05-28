@@ -1,0 +1,37 @@
+.modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+
+    transition: var(--transition);
+    position: absolute;
+    background-color: #fff;
+    color: black;
+    top: 100px;
+    left: calc(50% - 275px);
+    width: 550px;
+    height: 400px;
+
+}
+.modal__title {
+    font-size: var(--font-size-header);
+}
+
+.btn__wrapper {
+    width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.overlay {
+    z-index: 1;
+    transition: var(--transition);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: var(--color-light-gray);  
+}
+

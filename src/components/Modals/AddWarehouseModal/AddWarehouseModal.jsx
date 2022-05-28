@@ -1,8 +1,8 @@
 import { useState } from "react";
 import  Button  from "@mui/material/Button";
-import styles from "./WarehouseModal.module.css";
+import styles from "./AddWarehouseModal.module.css";
 
-const WarehouseModal = ({ setShowModal, setNewWarehouse }) => {
+const AddWarehouseModal = ({ setShowModal, setNewWarehouse }) => {
     const [inputValue, setInputValue] = useState('');
     const handleChange = (e) => {
         setInputValue(e.target.value);
@@ -17,10 +17,10 @@ const WarehouseModal = ({ setShowModal, setNewWarehouse }) => {
 					x
 				</button>
 				<input type="text" value={inputValue} onChange={(e) => handleChange(e)}/>
-                <Button onClick={() => setNewWarehouse(inputValue)}>Add warehouse +</Button>
+                <Button onClick={() => setNewWarehouse(inputValue)}>Добавить склад +</Button>
 			</div>
 		</div>
 	);
 };
 
-export default WarehouseModal;
+export default AddWarehouseModal;

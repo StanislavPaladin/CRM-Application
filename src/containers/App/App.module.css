@@ -1,7 +1,7 @@
 .container {
     background-color: var(--theme-default-bg);
     transition: var(--transition);
-    min-height: 730px;
+    height: 100vh;
     position: relative;
-    margin: 10px 0 0 60px;
+    margin: 0 0 0 47px;
 }

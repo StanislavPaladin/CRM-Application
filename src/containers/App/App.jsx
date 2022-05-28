@@ -6,7 +6,11 @@ import routesConfig from "@routes/routesConfig";
 import { changeCSSVariables } from "@services/changeCSSVariables";
 import Sidebar from "@components/Sidebar";
 
+// rc-tooltip-styles
+import 'rc-tooltip/assets/bootstrap_white.css';
+// module styles
 import styles from "./App.module.css";
+
 
 const App = () => {
 	const theme = getLocalStorage("theme");
@@ -16,6 +20,7 @@ const App = () => {
 	return (
 		<div className={styles.container}>
 			<BrowserRouter>
+				
 				<Sidebar />
 				<Routes>
 					{routesConfig.map((route, index) => (
