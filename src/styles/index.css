@@ -10,6 +10,7 @@
 	--color-green: #2daa89;
 	--color-orange: #f98500;
 	--color-light-sky: #bacbf0;
+	--color-red: red;
 
 	/* margins and paddings */
 	--spacing-ultrasmall: 3px;
@@ -29,6 +30,7 @@
 	--font-size-header: 26px;
 	--font-size-subheader: 18px;
 	--font-size-main: 18px;
+	--font-size-small: 14px;
 
 	/* borders */
 	--border-radius-small: 3px;
@@ -76,6 +78,10 @@ img, svg {
 	width: 100%;
 	height: 100%;
 	display: block;
+}
+
+a {
+	text-decoration: none;
 }
 
 

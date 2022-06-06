@@ -1,13 +1,10 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import PropTypes from "prop-types";
 import { addWarehouse, removeWarehouse } from "@store/actions";
 import { warehouseSelector } from "@store/constants/selectors";
-import RemoveWarehouseModal from "@components/Modals/RemoveWarehouseModal/RemoveWarehouseModal";
-
-import Button from "@mui/material/Button";
 import WarehousesList from "@components/Warehouses/WarehousesList/WarehousesList";
-import AddWarehouseModal from "@components/Modals/AddWarehouseModal/AddWarehouseModal";
+import RemoveItemModal from "@components/Modals/RemoveItemModal";
+import AddNewItemModal from "@components/Modals/AddNewItemModal/AddNewItemModal";
 
 import styles from "./Warehouses.module.css";
 
@@ -18,9 +15,12 @@ const Warehouses = () => {
 	const [newWarehouse, setNewWarehouse] = useState(null);
 	// remove warehouse
 	const [warehouseToRemove, setWarehouseToRemove] = useState(null);
-	const [deletedWarehouse, setDeletedWarehouse] = useState(null);
+	const [warehouseToDelete, setWarehouseToDelete] = useState(null);
 	// delete warehouse modal
 	const [requestDeleteModal, setRequestDeleteModal] = useState(false);
+
+	// set active warehouse to open profile
+	const [warehouseActive, setWarehouseActive] = useState(null);
 
 	const handleDeleteItem = (item) => {
 		setRequestDeleteModal(true);
@@ -58,20 +58,24 @@ const Warehouses = () => {
 
 	useEffect(() => {
 		setShowModal(false);
+		console.log('newWarehouse', newWarehouse);
 		newWarehouse && createNewWarehouse(newWarehouse);
 	}, [newWarehouse]);
 
 	useEffect(() => {
-		deletedWarehouse && deleteWarehouse(warehouseToRemove.id);
-	}, [deletedWarehouse]);
+		warehouseToDelete && deleteWarehouse(warehouseToRemove.id);
+	}, [warehouseToDelete]);
 
-	const createNewWarehouse = (newWarehouse) => {
+	const createNewWarehouse = ({ itemName, itemSpace }) => {
+		// console.log
 		const id = generateId();
 		dispatch(
 			addWarehouse({
 				[id]: {
 					id: id,
-					name: newWarehouse,
+					name: itemName,
+					space: itemSpace,
+					usedSpace: 0,
 				},
 			})
 		);
@@ -84,32 +88,33 @@ const Warehouses = () => {
 	return (
 		<div className={styles.container}>
 			{showModal && (
-				<AddWarehouseModal
+				<AddNewItemModal
+					itemsList={warehousesList}
 					setShowModal={setShowModal}
-					setNewWarehouse={setNewWarehouse}
+					setNewItem={setNewWarehouse}
+					item={"склад"}
 				/>
 			)}
 			{requestDeleteModal && (
-				<RemoveWarehouseModal
+				<RemoveItemModal
 					setRequestDeleteModal={setRequestDeleteModal}
-					warehouseToRemove={warehouseToRemove}
-					setDeletedWarehouse={setDeletedWarehouse}
+					itemToDelete={warehouseToRemove}
+					setItemToDelete={setWarehouseToDelete}
+					item={"склад"}
 				/>
 			)}
 
-			<WarehousesList
-				warehousesList={warehousesList}
-				setWarehouseToRemove={setWarehouseToRemove}
-				setShowModal={setShowModal}
-				storeData={storeData}
-				handleDeleteItem={handleDeleteItem}
-			/>
+			
+				<WarehousesList
+					warehousesList={warehousesList}
+					setWarehouseToRemove={setWarehouseToRemove}
+					setShowModal={setShowModal}
+					handleDeleteItem={handleDeleteItem}
+					setWarehouseActive={setWarehouseActive}
+				/>
 		</div>
 	);
 };
 
-Warehouses.propTypes = {
-	propName: PropTypes.string,
-};
 
 export default Warehouses;

@@ -2,6 +2,9 @@
     background-color: var(--theme-default-bg);
     transition: var(--transition);
     height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
     margin: 0 0 0 47px;
 }

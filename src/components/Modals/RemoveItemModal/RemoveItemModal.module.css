@@ -3,8 +3,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
-
     transition: var(--transition);
     position: absolute;
     background-color: #fff;
@@ -27,11 +25,13 @@
 }
 
 .overlay {
-    z-index: 1;
+    z-index: 3;
     transition: var(--transition);
     width: 100%;
     height: 100%;
     position: absolute;
+    top: 0;
+    left: 0;
     background-color: var(--color-light-gray);  
 }
 

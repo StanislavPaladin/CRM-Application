@@ -1,9 +1,10 @@
 import PropTypes from "prop-types";
 import cn from "classnames";
 import Tooltip from "rc-tooltip";
+import { Link } from "react-router-dom";
 
 import Button from "@mui/material/Button";
-import EditIcon from "@mui/icons-material/EditOutlined";
+import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForeverOutlined";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircleOutlined";
 
@@ -14,11 +15,15 @@ const WarehousesList = ({
 	setShowModal,
 	setWarehouseToRemove,
 	handleDeleteItem,
+	setWarehouseActive,
 }) => {
-
-	const handleClick = (item) => {
+	const requestToDelete = (item) => {
 		setWarehouseToRemove(item);
 		handleDeleteItem(item);
+	};
+
+	const requestToShowItemPage = (item) => {
+		setWarehouseActive(item);
 	};
 
 	return (
@@ -47,29 +52,51 @@ const WarehousesList = ({
 											{" " + item.name}
 										</span>
 									</p>
+									<p className={styles.list__subheader}>
+										Общая площадь склада:
+										<span className={styles.list__name}>
+											{" " + item.space + " кв.м."}
+										</span>
+									</p>
+									<p className={styles.list__subheader}>
+										Свободная площадь склада:
+										<span className={styles.list__name}>
+											{" " + item.space + " кв.м."}
+										</span>
+									</p>
 								</div>
 								<div className={styles.item__tools}>
-									<div
-										className={cn(
-											styles.tools__icon,
-											styles.icon__edit
-										)}
-									>
-										<Tooltip
-											style={{ color: "transparent" }}
-											placement="top"
-											trigger={["hover"]}
-											overlay={
-												<span
-													className={styles.tooltip}
-												>
-													Изменение данных
-												</span>
-											}
+									<Link to={`/warehouses/${item.id}`}>
+										<div
+											className={cn(
+												styles.tools__icon,
+												styles.icon__edit
+											)}
 										>
-											<EditIcon />
-										</Tooltip>
-									</div>
+											<Tooltip
+												style={{ color: "transparent" }}
+												placement="top"
+												trigger={["hover"]}
+												overlay={
+													<span
+														className={
+															styles.tooltip
+														}
+													>
+														Просмотр данных о складе
+													</span>
+												}
+											>
+												<FormatListBulletedIcon
+													onClick={() =>
+														requestToShowItemPage(
+															item
+														)
+													}
+												/>
+											</Tooltip>
+										</div>
+									</Link>
 									<div
 										className={cn(
 											styles.tools__icon,
@@ -111,7 +138,7 @@ const WarehousesList = ({
 										>
 											<DeleteForeverIcon
 												onClick={() =>
-													handleClick(item)
+													requestToDelete(item)
 												}
 											/>
 										</Tooltip>

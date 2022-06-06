@@ -11,6 +11,7 @@ const store = createStore(
 store.subscribe(() => {
     setLocalStorage('theme', store.getState().themeReducer);
 	setLocalStorage('warehouses', store.getState().warehouseReducer);
+	setLocalStorage('products', store.getState().productsReducer)
 });
 
 export default store;
